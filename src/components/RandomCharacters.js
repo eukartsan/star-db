@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SwapiService from '../services/swapi-service'
 import Spinner from './spinner'
+import ErrorBlog from './errorblog'
 
 import './style.css';
 
@@ -10,12 +11,15 @@ export default class RandomCharacters extends Component {
 
     state = {
         chapters: {},
-        loading: true
+        loading: true,
+        error: false
     }
 
     constructor() {
         super()
         this.updatePeople()
+        this.interval = setInterval(this.updatePeople, 2000)
+        //clearInterval(this.interval)
     }
 
     onChapterLoaded = (chapters) => {
@@ -25,23 +29,35 @@ export default class RandomCharacters extends Component {
         })
     }
 
-    updatePeople() {
+    onError = (err) => {
+        this.setState({
+            error: true,
+            loading: false
+        })
+    }
+
+    updatePeople = () => {
         const id = Math.floor(Math.random() * 10) + 4
         //const id = 3
         this.swapiService
             .getPeopleID(id)
             .then(this.onChapterLoaded)
+            .catch(this.onError)
     }
 
     render() {
 
-        const { chapters, loading } = this.state
+        const { chapters, loading, error } = this.state
 
+        const hasData = !(loading || error)
+
+        const errorMessage = error ? <ErrorBlog/> : null
         const spinner = loading ? <Spinner /> : null
-        const content = !loading ? <ChapterView chapters={chapters} /> : null
+        const content = hasData ? <ChapterView chapters={chapters} /> : null
 
         return (
             <div className="random-planet jumbotron rounded">
+                {errorMessage}
                 {spinner}
                 {content}
             </div>
