@@ -44,19 +44,37 @@ export default class SwapiService {
         return this.getResource(`/species/${id}`)
     }
 
-    getPeopleID(id){
-        return this.getResource(`/people/${id}`)
+    async getPeopleID(id){
+        const chapters = await this.getResource(`/people/${id}`)
+        return this.transformChapters(chapters)
+    }
+
+    extractId(item) {
+        const idReg = /\/([0-9]*)\/$/
+        return item.url.match(idReg)[1]
+    }
+
+    transformChapters(chapters){
+        return{
+            id: this.extractId(chapters),
+            name: chapters.name,
+            gender: chapters.gender,
+            birth_year: chapters.birth_year,
+            hair_color: chapters.hair_color,
+            height: chapters.height,
+            mass: chapters.mass
+        }
     }
 }
 
 
 const swapi = new SwapiService()
 
-swapi.getAllFilms().then((films) => {
-    films.forEach((p) => {
-        console.log(p.title)
-    })
-})
+// swapi.getAllFilms().then((films) => {
+//     films.forEach((p) => {
+//         console.log(p.title)
+//     })
+// })
 
 // swapi.getFilmID(2).then((p) => {
 //         console.log(p.title)
