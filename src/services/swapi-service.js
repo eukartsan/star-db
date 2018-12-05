@@ -39,7 +39,7 @@ export default class SwapiService {
     }
 
     async getStarshipID(id) {
-        const starship = this.getResource(`/starships/${id}/`);
+        const starship = await this.getResource(`/starships/${id}/`);
         return this._transformStarship(starship);
     }
 
@@ -68,7 +68,7 @@ export default class SwapiService {
             length: starship.length,
             crew: starship.crew,
             passengers: starship.passengers,
-            cargoCapacity: starship.cargoCapacity
+            starship_class: starship.starship_class
         }
     };
 

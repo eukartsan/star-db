@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import Header from './Header'
 import RandomCharacters from './RandomCharacters'
 import ItemList from './Item-List'
-import FilmsDetails from './Films'
+import ItemDetails from './ItemDetails'
 
 export default class App extends Component {
 
     state = {
         showRandomChapter: true,
-        selectedShip: null
+        selectedShip: 5
     }
 
     toggleRandomChapter = () => {
@@ -38,12 +38,12 @@ export default class App extends Component {
                     Toggle Random Chapter
                 </button>
 
-                <div>
-                    <div>
+                <div className="row mb2">
+                    <div className="col-md-6">
                         <ItemList onItemSelected={this.onChapterSelected}/>
                     </div>
-                    <div>
-                        <FilmsDetails personId={this.state.selectedShip}/>
+                    <div className="col-md-6">
+                        <ItemDetails itemId={this.state.selectedShip}/>
                     </div>
                 </div>
             </div>
