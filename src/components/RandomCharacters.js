@@ -15,8 +15,7 @@ export default class RandomCharacters extends Component {
         error: false
     }
 
-    constructor() {
-        super()
+    componentDidMount(){
         this.updatePeople()
         this.interval = setInterval(this.updatePeople, 2000)
         //clearInterval(this.interval)
