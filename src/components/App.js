@@ -34,16 +34,16 @@ export default class App extends Component {
                 {chapter}
 
                 <button
-                onClick={this.toggleRandomChapter}>
+                    onClick={this.toggleRandomChapter}>
                     Toggle Random Chapter
                 </button>
 
                 <div className="row mb2">
                     <div className="col-md-6">
-                        <ItemList onItemSelected={this.onChapterSelected}/>
+                        <ItemList onItemSelected={this.onChapterSelected} />
                     </div>
                     <div className="col-md-6">
-                        <ItemDetails itemId={this.state.selectedShip}/>
+                        <ItemDetails itemId={this.state.selectedShip} />
                     </div>
                 </div>
             </div>

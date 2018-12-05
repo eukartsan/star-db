@@ -1,4 +1,3 @@
-
 export default class SwapiService {
 
     apiurl = 'https://swapi.co/api'
@@ -15,52 +14,52 @@ export default class SwapiService {
 
     async getAllPeople() {
         const res = await this.getResource(`/people/`);
-        return res.results.map(this._transformPerson);
+        return res.results.map(this.transformChapter);
     }
 
     async getPeopleID(id) {
         const chapter = await this.getResource(`/people/${id}/`);
-        return this._transformPerson(chapter);
+        return this.transformChapter(chapter);
     }
 
-    async getAllPlanets() {
-        const res = await this.getResource(`/planets/`);
-        return res.results.map(this._transformPlanet);
+    async getAllFilms() {
+        const res = await this.getResource(`/films/`);
+        return res.results.map(this.transformFilms);
     }
 
-    async getPlanetID(id) {
-        const planet = await this.getResource(`/planets/${id}/`);
-        return this._transformPlanet(planet);
+    async getFilmID(id) {
+        const film = await this.getResource(`/films/${id}/`);
+        return this.transformFilms(film);
     }
 
     async getAllStarships() {
         const res = await this.getResource(`/starships/`);
-        return res.results.map(this._transformStarship);
+        return res.results.map(this.transformStarship);
     }
 
     async getStarshipID(id) {
         const starship = await this.getResource(`/starships/${id}/`);
-        return this._transformStarship(starship);
+        return this.transformStarship(starship);
     }
 
-    _extractId(item) {
+    extractId(item) {
         const idRegExp = /\/([0-9]*)\/$/;
         return item.url.match(idRegExp)[1];
     }
 
-    _transformPlanet = (planet) => {
+    transformFilms = (film) => {
         return {
-            id: this._extractId(planet),
-            name: planet.name,
-            population: planet.population,
-            rotationPeriod: planet.rotation_period,
-            diameter: planet.diameter
+            id: this.extractId(film),
+            title: film.title,
+            release_date: film.release_date,
+            director: film.director,
+            producer: film.producer
         };
     };
 
-    _transformStarship = (starship) => {
+    transformStarship = (starship) => {
         return {
-            id: this._extractId(starship),
+            id: this.extractId(starship),
             name: starship.name,
             model: starship.model,
             manufacturer: starship.manufacturer,
@@ -72,9 +71,9 @@ export default class SwapiService {
         }
     };
 
-    _transformPerson = (chapter) => {
+    transformChapter = (chapter) => {
         return {
-            id: this._extractId(chapter),
+            id: this.extractId(chapter),
             name: chapter.name,
             gender: chapter.gender,
             birth_year: chapter.birth_year,

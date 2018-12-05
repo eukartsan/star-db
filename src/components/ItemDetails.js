@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './style.css'
 import SwapiService from '../services/swapi-service'
+import Spinner from './spinner'
 
 export default class ItemDetails extends Component {
 
@@ -10,7 +11,7 @@ export default class ItemDetails extends Component {
         item: null
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.updateItem()
     }
 
@@ -36,10 +37,10 @@ export default class ItemDetails extends Component {
     render() {
 
         if (!this.state.item) {
-            return <span>Select a starship from a list</span>
+            return <Spinner />
         }
 
-        const {id, name, model, manufacturer, costInCredits, length, crew, passengers, starship_class} = this.state.item
+        const { id, name, model, manufacturer, costInCredits, length, crew, passengers, starship_class } = this.state.item
 
         return (
             <div className="item-details card">

@@ -15,10 +15,13 @@ export default class RandomCharacters extends Component {
         error: false
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.updatePeople()
-        this.interval = setInterval(this.updatePeople, 2000)
-        //clearInterval(this.interval)
+        this.interval = setInterval(this.updatePeople, 5000)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval)
     }
 
     onChapterLoaded = (chapters) => {
@@ -50,7 +53,7 @@ export default class RandomCharacters extends Component {
 
         const hasData = !(loading || error)
 
-        const errorMessage = error ? <ErrorBlog/> : null
+        const errorMessage = error ? <ErrorBlog /> : null
         const spinner = loading ? <Spinner /> : null
         const content = hasData ? <ChapterView chapters={chapters} /> : null
 
