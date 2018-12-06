@@ -3,12 +3,15 @@ import Header from './Header'
 import RandomCharacters from './RandomCharacters'
 import ItemList from './Item-List'
 import ItemDetails from './ItemDetails'
+import StarshipPage from './Starship-Page'
+import SwapiService from '../services/swapi-service'
 
 export default class App extends Component {
 
+    swapiService = new SwapiService()
+
     state = {
-        showRandomChapter: true,
-        selectedShip: 5
+        showRandomChapter: true
     }
 
     toggleRandomChapter = () => {
@@ -19,11 +22,6 @@ export default class App extends Component {
         })
     }
 
-    onChapterSelected = (id) => {
-        this.setState({
-            selectedShip: id
-        })
-    }
 
     render() {
         const chapter = this.state.showRandomChapter ? <RandomCharacters /> : null
@@ -38,14 +36,31 @@ export default class App extends Component {
                     Toggle Random Chapter
                 </button>
 
+                <StarshipPage />
+
                 <div className="row mb2">
                     <div className="col-md-6">
-                        <ItemList onItemSelected={this.onChapterSelected} />
+                        <ItemList
+                            onItemSelected={this.onChapterSelected}
+                            getData={this.swapiService.getAllPeople}
+                        />
                     </div>
                     <div className="col-md-6">
                         <ItemDetails itemId={this.state.selectedShip} />
                     </div>
                 </div>
+
+                <div className="row mb2">
+                    <div className="col-md-6">
+                        <ItemList
+                            onItemSelected={this.onChapterSelected}
+                            getData={this.swapiService.getAllStarships} />
+                    </div>
+                    <div className="col-md-6">
+                        <ItemDetails personId={this.state.selectedShip} />
+                    </div>
+                </div>
+
             </div>
 
         )

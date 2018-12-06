@@ -2,7 +2,7 @@ export default class SwapiService {
 
     apiurl = 'https://swapi.co/api'
 
-    async getResource(url) {
+    getResource = async (url) => {
         const res = await fetch(`${this.apiurl}${url}`)
 
         if (!res.ok) {
@@ -12,39 +12,39 @@ export default class SwapiService {
         return await res.json()
     }
 
-    async getAllPeople() {
-        const res = await this.getResource(`/people/`);
-        return res.results.map(this.transformChapter);
+    getAllPeople = async() => {
+        const res = await this.getResource(`/people/`)
+        return res.results.map(this.transformChapter)
     }
 
-    async getPeopleID(id) {
-        const chapter = await this.getResource(`/people/${id}/`);
-        return this.transformChapter(chapter);
+    getPeopleID = async (id) => {
+        const chapter = await this.getResource(`/people/${id}/`)
+        return this.transformChapter(chapter)
     }
 
-    async getAllFilms() {
-        const res = await this.getResource(`/films/`);
-        return res.results.map(this.transformFilms);
+    getAllFilms = async() => {
+        const res = await this.getResource(`/films/`)
+        return res.results.map(this.transformFilms)
     }
 
-    async getFilmID(id) {
-        const film = await this.getResource(`/films/${id}/`);
-        return this.transformFilms(film);
+    getFilmID = async(id) => {
+        const film = await this.getResource(`/films/${id}/`)
+        return this.transformFilms(film)
     }
 
-    async getAllStarships() {
-        const res = await this.getResource(`/starships/`);
-        return res.results.map(this.transformStarship);
+    getAllStarships = async() => {
+        const res = await this.getResource(`/starships/`)
+        return res.results.map(this.transformStarship)
     }
 
-    async getStarshipID(id) {
-        const starship = await this.getResource(`/starships/${id}/`);
-        return this.transformStarship(starship);
+    getStarshipID = async(id) => {
+        const starship = await this.getResource(`/starships/${id}/`)
+        return this.transformStarship(starship)
     }
 
-    extractId(item) {
-        const idRegExp = /\/([0-9]*)\/$/;
-        return item.url.match(idRegExp)[1];
+    extractId = (item) => {
+        const idRegExp = /\/([0-9]*)\/$/
+        return item.url.match(idRegExp)[1]
     }
 
     transformFilms = (film) => {

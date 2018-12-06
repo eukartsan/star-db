@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './style.css'
 import SwapiService from '../services/swapi-service'
 import Spinner from './spinner'
+import ErrorButton from './ErrorButton'
 
 export default class ItemDetails extends Component {
 
@@ -80,6 +81,7 @@ export default class ItemDetails extends Component {
                         </li>
                     </ul>
                 </div>
+                <ErrorButton />
             </div>
         )
     }
