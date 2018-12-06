@@ -22,6 +22,21 @@ export default class SwapiService {
         return this.transformChapter(chapter)
     }
 
+    getAllVehicles = async() => {
+        const res = await this.getResource(`/vehicles/`)
+        return res.results.map(this.transformVehicles)
+    }
+
+    getAllPlanets = async () => {
+        const res = await this.getResource(`/planets/`);
+        return res.results.map(this.transformPlanet);
+    };
+
+    getPlanetsID = async (id) => {
+        const chapter = await this.getResource(`/planets/${id}/`)
+        return this.transformPlanet(chapter)
+    }
+
     getAllFilms = async() => {
         const res = await this.getResource(`/films/`)
         return res.results.map(this.transformFilms)
@@ -69,7 +84,31 @@ export default class SwapiService {
             passengers: starship.passengers,
             starship_class: starship.starship_class
         }
-    };
+    }
+
+    transformPlanet = (planet) => {
+        return {
+            id: this.extractId(planet),
+            name: planet.name,
+            population: planet.population,
+            rotationPeriod: planet.rotation_period,
+            diameter: planet.diameter
+        }
+    }
+
+    transformVehicles = (vehicles) => {
+        return {
+            id: this.extractId(vehicles),
+            name: vehicles.name,
+            model: vehicles.model,
+            length: vehicles.length,
+            crew: vehicles.crew,
+            cost_in_credits: vehicles.cost_in_credits,
+            passengers: vehicles.passengers,
+            manufacturer: vehicles.manufacturer,
+            consumables: vehicles.consumables,
+        }
+    }
 
     transformChapter = (chapter) => {
         return {

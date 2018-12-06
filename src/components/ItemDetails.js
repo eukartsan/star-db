@@ -37,16 +37,19 @@ export default class ItemDetails extends Component {
 
     render() {
 
-        if (!this.state.item) {
-            return <Spinner />
+        const {item} = this.state
+
+        if (!item) {
+            return <span>Select a person from a list</span>
         }
 
-        const { id, name, model, manufacturer, costInCredits, length, crew, passengers, starship_class } = this.state.item
+        const { id, name, model, manufacturer, costInCredits, length, crew, passengers, starship_class } = item
 
         return (
             <div className="item-details card">
                 <img className="item-image"
-                     src={`https://starwars-visualguide.com/assets/img/starships/${id}.jpg`} />
+                     src={`https://starwars-visualguide.com/assets/img/starships/${id}.jpg`}
+                     alt="starship"/>
 
                 <div className="card-body">
                     <h4>{name}</h4>
