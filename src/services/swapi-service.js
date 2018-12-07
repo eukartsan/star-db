@@ -2,6 +2,8 @@ export default class SwapiService {
 
     apiurl = 'https://swapi.co/api'
 
+    imguel = 'https://starwars-visualguide.com/assets/img'
+
     getResource = async (url) => {
         const res = await fetch(`${this.apiurl}${url}`)
 
@@ -12,7 +14,7 @@ export default class SwapiService {
         return await res.json()
     }
 
-    getAllPeople = async() => {
+    getAllPeople = async () => {
         const res = await this.getResource(`/people/`)
         return res.results.map(this.transformChapter)
     }
@@ -21,8 +23,8 @@ export default class SwapiService {
         const chapter = await this.getResource(`/people/${id}/`)
         return this.transformChapter(chapter)
     }
-np
-    getAllVehicles = async() => {
+    np
+    getAllVehicles = async () => {
         const res = await this.getResource(`/vehicles/`)
         return res.results.map(this.transformVehicles)
     }
@@ -37,22 +39,22 @@ np
         return this.transformPlanet(chapter)
     }
 
-    getAllFilms = async() => {
+    getAllFilms = async () => {
         const res = await this.getResource(`/films/`)
         return res.results.map(this.transformFilms)
     }
 
-    getFilmID = async(id) => {
+    getFilmID = async (id) => {
         const film = await this.getResource(`/films/${id}/`)
         return this.transformFilms(film)
     }
 
-    getAllStarships = async() => {
+    getAllStarships = async () => {
         const res = await this.getResource(`/starships/`)
         return res.results.map(this.transformStarship)
     }
 
-    getStarshipID = async(id) => {
+    getStarshipID = async (id) => {
         const starship = await this.getResource(`/starships/${id}/`)
         return this.transformStarship(starship)
     }
@@ -62,6 +64,18 @@ np
         return item.url.match(idRegExp)[1]
     }
 
+    getChapterImage = ({ id }) => {
+        return `${this.imguel}/characters/${id}.jpg`
+    }
+
+    getPlanetsImage = ({ id }) => {
+        return `${this.imguel}/planent/${id}.jpg`
+    }
+
+    getStarshipImage = ({ id }) => {
+        return `${this.imguel}/starships/${id}.jpg`
+    }
+
     transformFilms = (film) => {
         return {
             id: this.extractId(film),
@@ -69,8 +83,8 @@ np
             release_date: film.release_date,
             director: film.director,
             producer: film.producer
-        };
-    };
+        }
+    }
 
     transformStarship = (starship) => {
         return {

@@ -4,12 +4,27 @@ import SwapiService from '../services/swapi-service'
 import Spinner from './spinner'
 import ErrorButton from './ErrorButton'
 
+
+const Record = ({ item, field, label }) => {
+    return (
+        <li className="list-group-item">
+            <span className="term">{label}</span>
+            <span>{item[field]}</span>
+        </li>
+    )
+}
+
+export {
+    Record
+}
+
 export default class ItemDetails extends Component {
 
     swapiService = new SwapiService()
 
     state = {
-        item: null
+        item: null,
+        image: null
     }
 
     componentDidMount() {
@@ -23,41 +38,37 @@ export default class ItemDetails extends Component {
     }
 
     updateItem() {
-        const { itemId } = this.props
+        const { itemId } = this.props;
         if (!itemId) {
-            return
+            return;
         }
 
         this.swapiService
-            .getStarshipID(itemId)
+            .getPeopleID(itemId)
             .then((item) => {
-                this.setState({ item })
-            })
+                this.setState({ item });
+            });
     }
 
     render() {
 
-        const {item} = this.state
+        const { item, image } = this.state
 
         if (!item) {
             return <span>Select a person from a list</span>
         }
 
-        const { id, name, model, manufacturer, costInCredits, length, crew, passengers, starship_class } = item
+        const { id, name, manufacturer, costInCredits, length, crew, passengers, starship_class } = item
 
         return (
             <div className="item-details card">
                 <img className="item-image"
-                     src={`https://starwars-visualguide.com/assets/img/starships/${id}.jpg`}
-                     alt="starship"/>
+                     src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+                     alt="item" />
 
                 <div className="card-body">
                     <h4>{name}</h4>
                     <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
-                            <span className="term">Model</span>
-                            <span>{model}</span>
-                        </li>
                         <li className="list-group-item">
                             <span className="term">Manufacturer</span>
                             <span>{manufacturer}</span>

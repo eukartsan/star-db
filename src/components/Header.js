@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import './style.css';
+import './style.css'
 
 const Header = () => {
     return (
@@ -12,17 +13,28 @@ const Header = () => {
             </h3>
             <ul className="d-flex">
                 <li>
-                    <a href="#">Starship</a>
+                    <Link to="/people">People</Link>
                 </li>
                 <li>
-                    <a href="#">Vehicles</a>
+                    <Link to="/planets">Planets</Link>
                 </li>
                 <li>
-                    <a href="#">Films</a>
+                    <Link to="/starships">Starships</Link>
                 </li>
             </ul>
+            {/*<ul className="d-flex">*/}
+                {/*<li>*/}
+                    {/*<a href="#">Starship</a>*/}
+                {/*</li>*/}
+                {/*<li>*/}
+                    {/*<a href="#">Vehicles</a>*/}
+                {/*</li>*/}
+                {/*<li>*/}
+                    {/*<a href="#">Films</a>*/}
+                {/*</li>*/}
+            {/*</ul>*/}
         </div>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header
