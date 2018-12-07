@@ -5,6 +5,7 @@ import ItemList from './Item-List'
 import ItemDetails from './ItemDetails'
 import StarshipPage from './Starship-Page'
 import SwapiService from '../services/swapi-service'
+import Row from './Row'
 
 export default class App extends Component {
 
@@ -26,6 +27,14 @@ export default class App extends Component {
     render() {
         const chapter = this.state.showRandomChapter ? <RandomCharacters /> : null
 
+        const personDetails = (
+            <ItemDetails itemId={11} />
+        )
+
+        const starshipDetails = (
+            <ItemDetails itemId={5} />
+        )
+
         return (
             <div>
                 <Header />
@@ -38,28 +47,34 @@ export default class App extends Component {
 
                 <StarshipPage />
 
-                <div className="row mb2">
-                    <div className="col-md-6">
-                        <ItemList
-                            onItemSelected={this.onChapterSelected}
-                            getData={this.swapiService.getAllPeople}
-                        />
-                    </div>
-                    <div className="col-md-6">
-                        <ItemDetails itemId={this.state.selectedShip} />
-                    </div>
-                </div>
+                <Row
+                    left={personDetails}
+                    right={starshipDetails} />
 
-                <div className="row mb2">
-                    <div className="col-md-6">
-                        <ItemList
-                            onItemSelected={this.onChapterSelected}
-                            getData={this.swapiService.getAllVehicles} />
-                    </div>
-                    <div className="col-md-6">
-                        <ItemDetails personId={this.state.selectedShip} />
-                    </div>
-                </div>
+                {/*<div className="row mb2">*/}
+                {/*<div className="col-md-6">*/}
+                {/*<ItemList*/}
+                {/*onItemSelected={this.onChapterSelected}*/}
+                {/*getData={this.swapiService.getAllPeople}*/}
+                {/*renderItem={(item) => item.name}*/}
+                {/*/>*/}
+                {/*</div>*/}
+                {/*<div className="col-md-6">*/}
+                {/*<ItemDetails itemId={this.state.selectedShip} />*/}
+                {/*</div>*/}
+                {/*</div>*/}
+
+                {/*<div className="row mb2">*/}
+                {/*<div className="col-md-6">*/}
+                {/*<ItemList*/}
+                {/*onItemSelected={this.onChapterSelected}*/}
+                {/*getData={this.swapiService.getAllVehicles}*/}
+                {/*renderItem={(item) => item.name}/>*/}
+                {/*</div>*/}
+                {/*<div className="col-md-6">*/}
+                {/*<ItemDetails personId={this.state.selectedShip} />*/}
+                {/*</div>*/}
+                {/*</div>*/}
 
             </div>
 

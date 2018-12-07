@@ -21,16 +21,16 @@ export default class SwapiService {
         const chapter = await this.getResource(`/people/${id}/`)
         return this.transformChapter(chapter)
     }
-
+np
     getAllVehicles = async() => {
         const res = await this.getResource(`/vehicles/`)
         return res.results.map(this.transformVehicles)
     }
 
     getAllPlanets = async () => {
-        const res = await this.getResource(`/planets/`);
-        return res.results.map(this.transformPlanet);
-    };
+        const res = await this.getResource(`/planets/`)
+        return res.results.map(this.transformPlanet)
+    }
 
     getPlanetsID = async (id) => {
         const chapter = await this.getResource(`/planets/${id}/`)
