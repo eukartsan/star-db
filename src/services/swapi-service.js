@@ -2,7 +2,7 @@ export default class SwapiService {
 
     apiurl = 'https://swapi.co/api'
 
-    imguel = 'https://starwars-visualguide.com/assets/img'
+    imgurl = 'https://starwars-visualguide.com/assets/img'
 
     getResource = async (url) => {
         const res = await fetch(`${this.apiurl}${url}`)
@@ -16,14 +16,14 @@ export default class SwapiService {
 
     getAllPeople = async () => {
         const res = await this.getResource(`/people/`)
-        return res.results.map(this.transformChapter)
+        return res.results.map(this.transformCharacter)
     }
 
     getPeopleID = async (id) => {
-        const chapter = await this.getResource(`/people/${id}/`)
-        return this.transformChapter(chapter)
+        const character = await this.getResource(`/people/${id}/`)
+        return this.transformCharacter(character)
     }
-    np
+
     getAllVehicles = async () => {
         const res = await this.getResource(`/vehicles/`)
         return res.results.map(this.transformVehicles)
@@ -35,8 +35,8 @@ export default class SwapiService {
     }
 
     getPlanetsID = async (id) => {
-        const chapter = await this.getResource(`/planets/${id}/`)
-        return this.transformPlanet(chapter)
+        const character = await this.getResource(`/planets/${id}/`)
+        return this.transformPlanet(character)
     }
 
     getAllFilms = async () => {
@@ -64,16 +64,16 @@ export default class SwapiService {
         return item.url.match(idRegExp)[1]
     }
 
-    getChapterImage = ({ id }) => {
-        return `${this.imguel}/characters/${id}.jpg`
+    getCharacterImage = ({ id }) => {
+        return `${this.imgurl}/characters/${id}.jpg`
     }
 
     getPlanetsImage = ({ id }) => {
-        return `${this.imguel}/planent/${id}.jpg`
+        return `${this.imgurl}/planent/${id}.jpg`
     }
 
     getStarshipImage = ({ id }) => {
-        return `${this.imguel}/starships/${id}.jpg`
+        return `${this.imgurl}/starships/${id}.jpg`
     }
 
     transformFilms = (film) => {
@@ -124,15 +124,15 @@ export default class SwapiService {
         }
     }
 
-    transformChapter = (chapter) => {
+    transformCharacter = (character) => {
         return {
-            id: this.extractId(chapter),
-            name: chapter.name,
-            gender: chapter.gender,
-            birth_year: chapter.birth_year,
-            hair_color: chapter.hair_color,
-            height: chapter.height,
-            mass: chapter.mass,
+            id: this.extractId(character),
+            name: character.name,
+            gender: character.gender,
+            birth_year: character.birth_year,
+            hair_color: character.hair_color,
+            height: character.height,
+            mass: character.mass,
         }
     }
 }

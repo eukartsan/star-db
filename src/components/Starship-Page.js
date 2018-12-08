@@ -35,7 +35,7 @@ export default class StarshipPage extends Component {
     }
 
 
-    onChapterSelected = (id) => {
+    onCharacterSelected = (id) => {
         this.setState({
             selectedShip: id
         })
@@ -49,7 +49,7 @@ export default class StarshipPage extends Component {
 
         const itemList = (
             <ItemList
-                onItemSelected={this.onChapterSelected}
+                onItemSelected={this.onCharacterSelected}
                 getData={this.swapiService.getAllStarships}>
                 {(item) => (`${item.model} (${item.length}, ${item.passengers})`)}
             </ItemList>

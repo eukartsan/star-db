@@ -15,18 +15,18 @@ export default class App extends Component {
     swapiService = new SwapiService()
 
     state = {
-        showRandomChapter: true
+        showRandomCharacter: true
     }
 
     render() {
 
-        const { getPeopleID, getPlanetsID, getChapterImage, getStarshipImage } = this.swapiService
+        const { getPeopleID, getPlanetsID, getCharacterImage, getStarshipImage } = this.swapiService
 
         const personDetails = (
             <ItemDetails
                 itemId={11}
                 getData={getPeopleID}
-                getImage={getChapterImage}>
+                getImage={getCharacterImage}>
 
                 <Record field="gender" label="Gender" />
 
@@ -59,7 +59,7 @@ export default class App extends Component {
                     {/*<div className="row mb2">*/}
                     {/*<div className="col-md-6">*/}
                     {/*<ItemList*/}
-                    {/*onItemSelected={this.onChapterSelected}*/}
+                    {/*onItemSelected={this.onCharacterSelected}*/}
                     {/*getData={this.swapiService.getAllPeople}*/}
                     {/*renderItem={(item) => item.name}*/}
                     {/*/>*/}
@@ -72,7 +72,7 @@ export default class App extends Component {
                     {/*<div className="row mb2">*/}
                     {/*<div className="col-md-6">*/}
                     {/*<ItemList*/}
-                    {/*onItemSelected={this.onChapterSelected}*/}
+                    {/*onItemSelected={this.onCharacterSelected}*/}
                     {/*getData={this.swapiService.getAllVehicles}*/}
                     {/*renderItem={(item) => item.name}/>*/}
                     {/*</div>*/}

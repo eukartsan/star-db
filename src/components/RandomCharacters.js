@@ -10,7 +10,7 @@ export default class RandomCharacters extends Component {
     swapiService = new SwapiService()
 
     state = {
-        chapters: {},
+        characters: {},
         loading: true,
         error: false
     }
@@ -24,9 +24,9 @@ export default class RandomCharacters extends Component {
         clearInterval(this.interval)
     }
 
-    onChapterLoaded = (chapters) => {
+    onCharactersLoaded = (characters) => {
         this.setState({
-            chapters,
+            characters,
             loading: false
         })
     }
@@ -41,21 +41,27 @@ export default class RandomCharacters extends Component {
     updatePeople = () => {
         const id = Math.floor(Math.random() * 10) + 4
         //const id = 3
+
+
+        // const swapi = await this.swapiService
+        // const people = await swapi.getPeopleID(id)
+        // const characters = await this.onCharactersLoaded
+
         this.swapiService
             .getPeopleID(id)
-            .then(this.onChapterLoaded)
+            .then(this.onCharactersLoaded)
             .catch(this.onError)
     }
 
     render() {
 
-        const { chapters, loading, error } = this.state
+        const { characters, loading, error } = this.state
 
         const hasData = !(loading || error)
 
         const errorMessage = error ? <ErrorBlog /> : null
         const spinner = loading ? <Spinner /> : null
-        const content = hasData ? <ChapterView chapters={chapters} /> : null
+        const content = hasData ? <CharactersView characters={characters} /> : null
 
         return (
             <div className="random-planet jumbotron rounded">
@@ -67,9 +73,9 @@ export default class RandomCharacters extends Component {
     }
 }
 
-const ChapterView = ({ chapters }) => {
+const CharactersView = ({ characters }) => {
 
-    const { id, name, gender, birth_year, hair_color, height, mass } = chapters
+    const { id, name, gender, birth_year, hair_color, height, mass } = characters
     return (
         <React.Fragment>
             <img className="planet-image"
